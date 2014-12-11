@@ -1,0 +1,97 @@
+<ui:composition template="/WEB-INF/template/StandardLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Search Product</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<h2>Search Order</h2>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Search" icon="ui-icon-search"
+						iconPos="right" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="New" icon="ui-icon-document" iconPos="right" outcome="/order/new_order" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="panel"
+				style="width:100%; margin-top:20px" columnClasses="label;"
+				styleClass="noBorders">
+
+				<p:outputLabel value="Number" />
+				<h:panelGroup>
+					<p:inputText size="10" />
+				to
+				<p:inputText size="10" />
+				</h:panelGroup>
+
+				<p:outputLabel value="Date" />
+				<h:panelGroup>
+					<p:calendar size="10" pattern="dd/MM/yyyy" />
+				to
+				<p:calendar size="10" pattern="dd/MM/yyyy" />
+				</h:panelGroup>
+
+				<p:outputLabel value="Seller" for="seller" />
+				<p:inputText id="seller" size="60" />
+
+				<p:outputLabel value="Client" for="client" />
+				<p:inputText id="client" size="60" />
+
+				<p:outputLabel value="Status" />
+				<p:selectManyCheckbox>
+					<f:selectItem itemValue="budget" itemLabel="Budget" />
+					<f:selectItem itemValue="send" itemLabel="Send" />
+					<f:selectItem itemValue="cancelled" itemLabel="Cancelled" />
+				</p:selectManyCheckbox>
+
+			</p:panelGrid>
+
+			<p:dataTable id="dataOrder" value="#{orderSearchBean.orderFilter}"
+				var="order" style="margin-top:20px"
+				emptyMessage="Product not found." rows="20" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
+				styleClass="noBorders">
+
+				<p:column headerText="Number" style="text-align:center; width:20px">
+					<h:outputText value="123" />
+				</p:column>
+
+				<p:column headerText="Client" style="text-align:center; width:100px">
+					<h:outputText value="Woodmans" />
+				</p:column>
+
+				<p:column headerText="Seller" style="text-align:center; width:100px">
+					<h:outputText value="Rafael Reis" />
+				</p:column>
+
+
+				<p:column headerText="Date Order"
+					style="text-align:center; width:20px">
+					<h:outputText value="12/12/2014" />
+				</p:column>
+
+
+				<p:column headerText="Total" style="text-align:right; width:100px">
+					<h:outputText value="$3.000" />
+				</p:column>
+
+
+				<p:column headerText="Status" style="text-align:center; width:10px">
+					<h:outputText value="Send" />
+				</p:column>
+
+				<p:column style="text-align:center; width:20px">
+					<p:button icon="ui-icon-pencil" title="Edit" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

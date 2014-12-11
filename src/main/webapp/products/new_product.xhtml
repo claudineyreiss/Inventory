@@ -1,0 +1,63 @@
+<ui:composition template="/WEB-INF/template/StandardLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="title">New Product</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<o:viewParam name="product" value="#{productBean.product}"/>
+			<f:event listener="#{productBean.init}" type="preRenderView"></f:event>
+		</f:metadata>
+		<h2>New Product</h2>
+		<h:form>
+			<p:messages autoUpdate="true" closable="true"/>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:button value="New" outcome="/products/new_product" iconPos="right" icon="ui-icon-document"/>
+					<p:commandButton value="Save" id="btnSave" action="#{productBean.save}" update="@form"/>
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Search" icon="ui-icon-search" iconPos="right" outcome="/products/search_product"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="panel"
+				style="width:100%; margin-top:20px" columnClasses="label;"
+				styleClass="noBorders">
+				<p:outputLabel value="SKU" for="sku" />
+				<p:inputText id="sku" maxlength="20" size="20" value="#{productBean.product.sku}"/>
+
+				<p:outputLabel value="Name" for="name" />
+				<p:inputText id="name" maxlength="80" size="60" value="#{productBean.product.name}"/>
+
+				<p:outputLabel value="Category" for="category" />
+				<p:selectOneMenu id="category" value="#{productBean.categoryParent}" converter="#{categoryConverter}">
+					<f:selectItem itemLabel="Select a category" />
+					<f:selectItems value="#{productBean.categoriesRoot}" var="obj" itemValue="#{obj}" itemLabel="#{obj.description}"/>
+					<p:ajax listener="#{productBean.loadSubcategory}" update="subcategory"/>
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Subcategory" for="subcategory" />
+				<p:selectOneMenu id="subcategory" value="#{productBean.product.category}" converter="#{categoryConverter}">
+					<f:selectItem itemLabel="Select a subcategory" />
+					<f:selectItems value="#{productBean.subCategories}" var="obj" itemValue="#{obj}" itemLabel="#{obj.description}"/>
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Unit Price" for="price" />
+				<p:inputText id="price" styleClass="coin" maxlength="10" size="10" value="#{productBean.product.unitPrice}">
+					<f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+				</p:inputText>
+
+
+				<p:outputLabel value="In Stock" for="stock" />
+				<p:inputText id="stock" size="10" maxlength="5" value="#{productBean.product.quantityStock}"/>
+
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

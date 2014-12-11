@@ -1,0 +1,81 @@
+<ui:composition template="/WEB-INF/template/StandardLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Search Product</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<h2>Search Product</h2>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Search" icon="ui-icon-search"
+						iconPos="right" action="#{productSearchBean.search}" update="@form"/>
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="New" outcome="/products/new_product" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="panel"
+				style="width:100%; margin-top:20px" columnClasses="label;"
+				styleClass="noBorders">
+				<p:outputLabel value="SKU" for="sku" />
+				<p:inputText id="sku" size="20" value="#{productSearchBean.filter.sku}"/>
+
+				<p:outputLabel value="Name" for="name" />
+				<p:inputText id="name" size="60" value="#{productSearchBean.filter.name}" />
+			</p:panelGrid>
+
+			<p:dataTable id="dataProduct"
+				value="#{productSearchBean.filterProducts}" var="product"
+				style="margin-top:20px" emptyMessage="Product not found." rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" styleClass="noBorders">
+
+				<p:column headerText="SKU" style="text-align:center; width:100px">
+					<h:outputText value="#{product.sku}" />
+				</p:column>
+
+				<p:column headerText="Name" style="text-align:center; width:100px">
+					<h:outputText value="#{product.name}" />
+				</p:column>
+
+				<p:column headerText="Category"
+					style="text-align:center; width:100px">
+					<h:outputText value="#{product.category.categoryParent.description} - #{product.category.description}" />
+				</p:column>
+
+
+				<p:column headerText="Price" style="text-align:right; width:100px">
+					<h:outputText value="#{product.unitPrice}">
+						<f:convertNumber type="currency"/>
+					</h:outputText>
+				</p:column>
+
+
+				<p:column headerText="In Stock"
+					style="text-align:right; width:100px">
+					<h:outputText value="#{product.quantityStock}" />
+				</p:column>
+
+				<p:column style="text-align:center; width:40px">
+					<p:button icon="ui-icon-pencil" title="Edit" outcome="/products/new_product">
+						<f:param name="product" value="#{product.id}"/>
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Delete" oncomplete="PF('cd').show()"/>
+				</p:column>
+
+			</p:dataTable>
+			
+			<p:confirmDialog header="Delete Product" message="Are you sure do you want to delete product?" 
+				widgetVar="cd">
+					<p:button value="No" onclick="PF('cd').hide(); return false;"/>
+					<p:commandButton value="Yes" oncomplete="PF('cd').hide(); return false;"/>
+				</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

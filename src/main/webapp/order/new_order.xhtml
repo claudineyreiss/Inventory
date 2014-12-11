@@ -1,0 +1,33 @@
+<ui:composition template="/WEB-INF/template/StandardLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">New Order</ui:define>
+
+	<ui:define name="body">
+		<h:form>
+			<h2>New Order</h2>
+			<p:messages autoUpdate="true" closable="true"/>
+			
+			<ui:include src="/WEB-INF/template/order/order_btn_layout.xhtml" />
+			<ui:include src="/WEB-INF/template/order/cover_order.xhtml" />
+
+			<p:tabView style="margin-top:20px">
+				<p:tab title="Items">
+					<ui:include src="/WEB-INF/template/order/order_items.xhtml" />
+				</p:tab>
+
+				<p:tab title="Delivery Informations">
+					<ui:include src="/WEB-INF/template/order/order_information.xhtml"/>
+				</p:tab>
+
+				<p:tab title="Observations">
+					<ui:include src="/WEB-INF/template/order/order_observation.xhtml"/>
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</ui:define>
+</ui:composition>

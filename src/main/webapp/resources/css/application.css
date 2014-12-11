@@ -1,0 +1,125 @@
+@CHARSET "UTF-8";
+
+body{
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+}
+
+header{
+	padding: 5px 0px;
+	margin-bottom: 20px;
+	height: 80px;
+	background: #95a5a6;
+	color: #fff;
+	box-shadow:0px 2px 2px;
+	
+}
+
+p{
+	text-align: center;
+	font-size: 10px;
+	color: #fff;
+	font: 10px 'LeagueGothicRegular';
+	letter-spacing: 4px;
+}
+
+h1{
+	font: 18px 'LeagueGothicRegular';
+	letter-spacing: 8px;
+	text-align: center;
+	color: #fff;
+}
+header>div{
+	margin-left: 10px;
+}
+
+#content{
+	padding: 0px 8px;	
+}
+
+footer{
+	padding: 0px 8px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#login-dialog{
+	width: 300px;
+	margin: auto;
+	margin-top: 150px;
+}
+
+.grid-login{
+	background-color: #ecf0f1;
+	border: 1px solid #bdc3c7;
+	margin-top: 8px;
+	padding: 10px;
+}
+
+.label{
+	width: 150px;
+}
+
+.ui-panelgrid td {
+	height: 34px;
+	background-color: #ecf0f1;
+}
+
+.ajax-status{
+	position:fixed;
+	top: 95px;
+	right: 10px;
+	width: 35px;
+	height: 35px;
+}
+
+.noBorders tr, .noBorders td {
+    background: #ecf0f1;
+    border: 1px solid #fff;
+}
+
+.ui-selectmanycheckbox td label{
+	padding-right: 10px;
+}
+
+.ui-autocomplete-input{
+	width: 100%;
+}
+
+/* TabView customize- begin */
+.ui-tabs .ui-tabs-panel {
+    padding: 0.5em 0.2em !important;
+}
+
+.ui-tabs {
+    padding: 0px !important;
+}
+
+.ui-tabs .ui-tabs-nav {
+    margin: -1px !important;
+}
+
+.ui-tabs.ui-tabs-top > .ui-tabs-nav {
+    padding: 0px !important;
+}
+
+/* TabView customize- end */
+
+/* Menu system begin */
+.menu-system {
+    border: 0px !important;
+    padding: 0px !important;
+    background: none !important;
+}
+
+.menu-system .ui-menu-parent > a .ui-menuitem-text, .menu-system > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
+    color: #fff !important;
+}
+
+.menu-system .ui-icon-triangle-1-s {
+    background: url(#{resources['images:under-arrow.png']}) no-repeat;
+ }
+ 
+/* Menu system end */

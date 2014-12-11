@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid columns="4" style="width:100%; margin-top:20px" columnClasses="label, field, label, field" styleClass="noBorders">
+		<p:outputLabel value="Number" />
+		<h:outputText value="#{orderBean.order.id}" />
+
+		<p:outputLabel value="Date of Creation" />
+		<h:outputText value="#{orderBean.order.dateCreate}">
+		 	<f:convertDateTime pattern="dd/MM/yyyy"/>
+		</h:outputText>
+
+		<p:outputLabel value="Status" />
+		<h:outputText value="#{orderBean.order.status}" />
+
+		<p:outputLabel value="Seller" for="seller" />
+		<p:selectOneMenu id="seller" value="#{orderBean.order.seller}">
+			<f:selectItem itemLabel="Select" />
+			<f:selectItem  itemLabel="Rafael Reis"/>
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Client" for="client" />
+		<p:autoComplete id="client" size="40" dropdown="true" value="#{orderBean.order.client}"/>
+		
+		<p:outputLabel value="Payment Type" for="payment" />
+		<p:selectOneMenu id="payment" value="#{orderBean.order.paymentType}">
+			<f:selectItem itemLabel="Select" />
+			<f:selectItem itemLabel="Credit Card" />
+		
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Shipping" for="shipping" />
+		<p:inputText id="shipping" maxlength="10" size="10" value="#{orderBean.order.valueDelivery}" styleClass="coin" >
+			<f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+		</p:inputText>
+
+		<p:outputLabel value="Sub Total" style="font-weight:bold"/>
+		<h:outputText value="$0.00" style="font-weight:bold; font-size:1.0em" />
+
+		<p:outputLabel value="Discount" for="discount"/>
+		<p:inputText id="discount" size="10" maxlength="10" value="#{orderBean.order.valueDiscount}" styleClass="coin">
+			<f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+		</p:inputText>
+
+		<p:outputLabel value="Total" style="font-weight:bold" />
+		<h:outputText id="total" value="#{orderBean.order.valueTotal}" style="font-weight:bold; font-size:1.0em" styleClass="coin">
+			<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+		</h:outputText>
+	</p:panelGrid>
+</ui:composition>
